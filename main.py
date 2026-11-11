@@ -13,11 +13,13 @@ Local check:
 import os
 from pathlib import Path
 
+DEFAULT_OUTPUT_DIR = "/output"
+
 
 def main() -> None:
     """Copy summary.txt beside this script to $MAKEFUN_OUTPUT_DIR/entry.txt."""
     summary_bytes = Path(__file__).resolve().with_name("summary.txt").read_bytes()
-    out_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR") or "/output")
+    out_dir = Path(os.environ.get("MAKEFUN_OUTPUT_DIR") or DEFAULT_OUTPUT_DIR)
     out_dir.mkdir(parents=True, exist_ok=True)
     (out_dir / "entry.txt").write_bytes(summary_bytes)
 
